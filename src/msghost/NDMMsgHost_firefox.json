@@ -1,0 +1,9 @@
+{
+  "name": "com.devnetra.ndm",
+  "description": "Nee Download Manager Native Messaging Host",
+  "path": "C:\\Program Files\\Devnetra\\NDM\\NDMMsgHost.exe",
+  "type": "stdio",
+  "allowed_extensions": [
+    "ndm@devnetra.com"
+  ]
+}

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NDM recent captures</title>
+  <link rel="stylesheet" href="ndm.css">
+  <style>
+    .wrap { max-width: 900px; margin: 0 auto; padding: 18px 16px 40px; }
+    .head { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; flex-wrap: wrap; }
+    .head h1 { font-size: 20px; flex: 1; }
+    .time { color: var(--dim); font-size: 11px; flex: none; width: 120px; text-align: right; }
+  </style>
+</head>
+<body>
+  <header class="brand">
+    <img src="images/ndm48.png" alt="">
+    <div>
+      <div class="title">Nee <b>Download Manager</b></div>
+      <div class="sub">Recent captures</div>
+    </div>
+    <div class="spacer"></div>
+    <span id="status" class="status wait"><span class="dot"></span><span id="statusText">Checking</span></span>
+  </header>
+  <div class="wrap">
+    <div class="head">
+      <h1>Sent from this browser</h1>
+      <button class="btn" id="openNdm">Open NDM</button>
+      <button class="btn ghost" id="clear">Clear list</button>
+    </div>
+    <div class="list" id="list"><div class="empty">Loading...</div></div>
+    <div class="footer">Downloads NDM could not take are restarted in the browser and marked <span class="tag">browser</span>.</div>
+  </div>
+  <script src="captured.js"></script>
+</body>
+</html>

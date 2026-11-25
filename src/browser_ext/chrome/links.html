@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Download links with NDM</title>
+  <link rel="stylesheet" href="ndm.css">
+  <style>
+    body { min-height: 100vh; }
+    .wrap { max-width: 1000px; margin: 0 auto; padding: 18px 16px 90px; }
+    .page { margin-bottom: 14px; }
+    .page h1 { font-size: 20px; }
+    .page .src { color: var(--dim); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin-top: 2px; }
+    .toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 12px; }
+    .toolbar input[type=search] { flex: 1 1 240px; }
+    .list { max-height: none; }
+    .item label { display: contents; cursor: pointer; }
+    .bar {
+      position: fixed; left: 0; right: 0; bottom: 0;
+      background: rgba(18,20,24,.96); border-top: 1px solid rgba(212,175,55,.35);
+      padding: 12px 16px;
+    }
+    .bar .in { max-width: 1000px; margin: 0 auto; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .bar .count { flex: 1; color: var(--dim); }
+    .bar .count b { color: var(--gold); }
+  </style>
+</head>
+<body>
+  <header class="brand">
+    <img src="images/ndm48.png" alt="">
+    <div>
+      <div class="title">Nee <b>Download Manager</b></div>
+      <div class="sub">Download all links</div>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <div class="page">
+      <h1 id="title">Links on this page</h1>
+      <div class="src" id="src"></div>
+    </div>
+
+    <div class="toolbar">
+      <input type="search" id="filter" placeholder="Filter by name, address or extension (e.g. .zip)" autocomplete="off">
+      <div class="chips" id="chips"></div>
+    </div>
+
+    <div class="list" id="list"><div class="empty">Loading...</div></div>
+  </div>
+
+  <div class="bar">
+    <div class="in">
+      <div class="count" id="count"></div>
+      <button class="btn ghost" id="selAll">Select shown</button>
+      <button class="btn ghost" id="selNone">Clear</button>
+      <button class="btn primary" id="send" disabled>Download with NDM</button>
+    </div>
+  </div>
+
+  <div id="toast" class="toast"></div>
+  <script src="links.js"></script>
+</body>
+</html>

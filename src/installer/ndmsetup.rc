@@ -1,0 +1,33 @@
+// Resources for ndmsetup643build1.exe (the manifest is embedded by CMake)
+#pragma code_page(65001)
+#include <winres.h>
+
+// Application / window icon (multi-size). Loaded with LoadIconWithScaleDown.
+1 ICON "../../resources/icons/ndm.ico"
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,5,0
+ PRODUCTVERSION 1,0,5,0
+ FILEFLAGSMASK 0x3fL
+ FILEFLAGS 0x0L
+ FILEOS VOS_NT_WINDOWS32
+ FILETYPE VFT_APP
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904b0"
+        BEGIN
+            VALUE "CompanyName", "Devnetra Consultancy"
+            VALUE "FileDescription", "Nee Download Manager Setup"
+            VALUE "FileVersion", "1.0.5.0"
+            VALUE "ProductName", "Nee Download Manager"
+            VALUE "ProductVersion", "1.0.5.0"
+            VALUE "LegalCopyright", "© 2026 Devnetra Consultancy · MIT License"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END

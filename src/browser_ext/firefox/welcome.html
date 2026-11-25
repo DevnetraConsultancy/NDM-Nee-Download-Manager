@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Welcome to NDM</title>
+  <link rel="stylesheet" href="ndm.css">
+  <style>
+    .hero {
+      text-align: center; padding: 48px 16px 30px;
+      background: radial-gradient(ellipse at 50% 0%, rgba(212,175,55,.12) 0%, rgba(18,20,24,0) 60%);
+      border-bottom: 1px solid rgba(212,175,55,.2);
+    }
+    .hero img { width: 84px; height: 84px; }
+    .hero h1 { font-size: 30px; margin-top: 14px; font-weight: 300; }
+    .hero h1 b { color: var(--gold); font-weight: 700; }
+    .hero p { color: var(--dim); font-size: 14px; max-width: 520px; margin: 10px auto 18px; }
+    .wrap { max-width: 860px; margin: 0 auto; padding: 26px 16px 40px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
+    .card h2 { font-size: 14px; color: var(--gold-lt); margin-bottom: 6px; }
+    .card p { margin: 0; color: var(--text); font-size: 14px; line-height: 1.5; }
+    .card p.dim { color: var(--dim); }
+    .num {
+      display: inline-flex; width: 22px; height: 22px; border-radius: 50%; align-items: center; justify-content: center;
+      background: rgba(212,175,55,.15); color: var(--gold); font-weight: 700; font-size: 12px; margin-right: 6px;
+    }
+    #checkBox { margin: 0 auto; display: inline-flex; gap: 10px; align-items: center; }
+    #help { margin-top: 12px; color: var(--dim); font-size: 13px; display: none; }
+    #help.show { display: block; }
+    kbd {
+      font: 600 11px var(--font); background: var(--panel-2); border: 1px solid var(--border);
+      border-bottom-width: 2px; border-radius: 4px; padding: 1px 6px; color: var(--text);
+    }
+  </style>
+</head>
+<body>
+  <section class="hero">
+    <img src="images/ndm128.png" alt="NDM">
+    <h1>Nee <b>Download Manager</b></h1>
+    <p>Your browser is now connected to NDM. Downloads you start are handed to NDM automatically, with your sign-in cookies, so they download faster and can be resumed.</p>
+    <div id="checkBox">
+      <span id="status" class="status wait"><span class="dot"></span><span id="statusText">Checking connection</span></span>
+      <button class="btn" id="retry">Check again</button>
+    </div>
+    <div id="help"></div>
+  </section>
+
+  <div class="wrap">
+    <div class="grid">
+      <div class="card">
+        <h2><span class="num">1</span>Click any download</h2>
+        <p>Archives, programs, disk images, video, audio and documents go straight to NDM.</p>
+      </div>
+      <div class="card">
+        <h2><span class="num">2</span>Right-click for more</h2>
+        <p>"Download with NDM" on links, images and media, or "Download all links with NDM" to pick files from a page.</p>
+      </div>
+      <div class="card">
+        <h2><span class="num">3</span>Grab videos</h2>
+        <p>Hover any video and press <b class="gold">Download</b>, then pick a quality.</p>
+      </div>
+      <div class="card">
+        <h2><span class="num">4</span>Stay in control</h2>
+        <p>Hold <kbd>Alt</kbd> while clicking to keep a download in the browser. Turn capture off, or off for one site, from the toolbar button.</p>
+      </div>
+    </div>
+    <div class="footer">Invented with care by Devnetra Consultancy &middot; &copy; 2026 Devnetra Consultancy &middot; MIT License</div>
+  </div>
+  <script src="welcome.js"></script>
+</body>
+</html>

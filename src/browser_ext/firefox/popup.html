@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Nee Download Manager</title>
+  <link rel="stylesheet" href="ndm.css">
+  <style>
+    body { width: 340px; }
+    main { padding: 12px; }
+    .quick { display: flex; gap: 6px; }
+    .quick input { flex: 1; }
+    .actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; }
+    details summary {
+      cursor: pointer; list-style: none; color: var(--dim); font-size: 12px;
+      text-transform: uppercase; letter-spacing: 1px; user-select: none;
+    }
+    details summary::-webkit-details-marker { display: none; }
+    details summary::before { content: "\25B8"; display: inline-block; margin-right: 6px; transition: transform .15s; color: var(--gold); }
+    details[open] summary::before { transform: rotate(90deg); }
+    details .body { margin-top: 10px; }
+    label.field { display: block; color: var(--dim); font-size: 11px; margin: 8px 0 4px; }
+    #site { font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .links { display: flex; justify-content: space-between; padding: 8px 2px 0; font-size: 12px; }
+    #hint { margin-top: 8px; font-size: 13px; color: var(--dim); display: none; }
+    #hint.show { display: block; }
+  </style>
+</head>
+<body>
+  <header class="brand">
+    <img src="images/ndm48.png" alt="">
+    <div>
+      <div class="title">Nee <b>Download Manager</b></div>
+      <div class="sub">Browser integration</div>
+    </div>
+    <div class="spacer"></div>
+    <span id="status" class="status wait"><span class="dot"></span><span id="statusText">Checking</span></span>
+  </header>
+
+  <main>
+    <section class="card">
+      <div class="row">
+        <div class="label">Capture downloads<small>Send matching browser downloads to NDM</small></div>
+        <label class="switch"><input type="checkbox" id="enabled"><span></span></label>
+      </div>
+      <div class="row">
+        <div class="label"><div id="site">This site</div><small>Capture on this site</small></div>
+        <label class="switch"><input type="checkbox" id="siteOn"><span></span></label>
+      </div>
+      <div class="row">
+        <div class="label">Download button<small>On videos, audio and large photos</small></div>
+        <label class="switch"><input type="checkbox" id="videoButton"><span></span></label>
+      </div>
+      <div id="hint"></div>
+    </section>
+
+    <section class="card">
+      <h3>Quick add</h3>
+      <form class="quick" id="quickForm">
+        <input type="url" id="quickUrl" placeholder="Paste a download address" autocomplete="off" spellcheck="false">
+        <button class="btn primary" type="submit">Add</button>
+      </form>
+      <div class="actions">
+        <button class="btn" id="grab">Download all links</button>
+        <button class="btn" id="openNdm">Open NDM</button>
+      </div>
+    </section>
+
+    <section class="card">
+      <details id="adv">
+        <summary>Settings</summary>
+        <div class="body">
+          <label class="field" for="exts">File types to capture</label>
+          <textarea id="exts" rows="4" spellcheck="false"></textarea>
+          <label class="field" for="minSize">Skip files smaller than (KB, 0 = never)</label>
+          <input type="number" id="minSize" min="0" step="1">
+          <div class="row" style="margin-top:6px">
+            <div class="label">Notifications</div>
+            <label class="switch"><input type="checkbox" id="notifications"><span></span></label>
+          </div>
+          <div class="inline" style="margin-top:8px">
+            <button class="btn primary" id="saveAdv">Save</button>
+            <button class="btn ghost" id="resetExts">Restore default types</button>
+          </div>
+        </div>
+      </details>
+    </section>
+
+    <div class="links">
+      <a href="captured.html" target="_blank">Recent captures</a>
+      <span class="dim">Hold <b>Alt</b> while clicking to skip NDM</span>
+    </div>
+  </main>
+
+  <div id="toast" class="toast"></div>
+  <script src="popup.js"></script>
+</body>
+</html>

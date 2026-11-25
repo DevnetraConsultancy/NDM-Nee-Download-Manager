@@ -1,0 +1,57 @@
+Nee Download Manager - Third-Party Notices
+==========================================
+
+Nee Download Manager (NDM) is (c) 2026 Devnetra Consultancy and licensed under
+the MIT License (see LICENSE.txt). NDM bundles the following independent
+programs in the "tools" folder. They are separate executables that NDM runs as
+external processes; each remains under its own licence, reproduced or linked
+below. NDM does not modify them.
+
+-------------------------------------------------------------------------------
+yt-dlp  (tools\yt-dlp.exe)
+-------------------------------------------------------------------------------
+Licence : The Unlicense (public domain dedication)
+Project : https://github.com/yt-dlp/yt-dlp
+Source  : https://github.com/yt-dlp/yt-dlp/releases
+Text    : https://github.com/yt-dlp/yt-dlp/blob/master/LICENSE
+The yt-dlp.exe release binary is built with PyInstaller and bundles Python and
+other components under their own (permissive) licences; see
+https://github.com/yt-dlp/yt-dlp/blob/master/THIRD_PARTY_LICENSES.txt
+
+-------------------------------------------------------------------------------
+FFmpeg  (tools\ffmpeg.exe, tools\ffprobe.exe)
+-------------------------------------------------------------------------------
+Build   : BtbN/FFmpeg-Builds, version N-129241-g05c674c913-20261123
+          (win64, configured with --enable-version3, without --enable-gpl:
+          an LGPL v3 build)
+Licence : GNU Lesser General Public License v3 or later
+          (https://www.gnu.org/licenses/lgpl-3.0.html). If a build configured
+          with --enable-gpl is bundled instead, the GNU GPL v3 applies
+          (https://www.gnu.org/licenses/gpl-3.0.html).
+Source  : FFmpeg source at the exact commit of this build:
+          https://github.com/FFmpeg/FFmpeg/tree/05c674c913
+          Build scripts and the matching release (dated 2026-11-23):
+          https://github.com/BtbN/FFmpeg-Builds
+          https://github.com/BtbN/FFmpeg-Builds/releases
+FFmpeg is a trademark of Fabrice Bellard, originator of the FFmpeg project.
+Devnetra Consultancy will also provide the corresponding source on request
+(devnetraconsultancy@gmail.com) for at least three years from distribution.
+
+-------------------------------------------------------------------------------
+aria2  (tools\aria2c.exe)
+-------------------------------------------------------------------------------
+Licence : GNU General Public License v2.0 or later, with the OpenSSL linking
+          exception. Full text: tools\aria2-COPYING.txt
+          (https://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
+Project : https://aria2.github.io/
+Source  : https://github.com/aria2/aria2/releases (the source tarball of the
+          release matching the bundled aria2c.exe version)
+Devnetra Consultancy will also provide the corresponding source on request
+(devnetraconsultancy@gmail.com) for at least three years from distribution.
+
+-------------------------------------------------------------------------------
+Deno  (tools\deno.exe, if bundled)
+-------------------------------------------------------------------------------
+Licence : MIT License, Copyright 2018-2026 the Deno authors
+Project : https://deno.com/   Source: https://github.com/denoland/deno
+Text    : https://github.com/denoland/deno/blob/main/LICENSE.md

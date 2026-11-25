@@ -1,0 +1,62 @@
+name: build & tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  windows:
+    runs-on: windows-2022
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Extension tests (Chrome and Firefox copies)
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          foreach ($b in 'chrome', 'firefox') {
+            $bg = "src/browser_ext/$b/background.js"; $ct = "src/browser_ext/$b/content.js"
+            node tests/extension/test_bg.js $bg;            if ($LASTEXITCODE) { exit 1 }
+            node tests/extension/test_content.js $ct;       if ($LASTEXITCODE) { exit 1 }
+            node tests/extension/test_l3.js $bg;            if ($LASTEXITCODE) { exit 1 }
+            node tests/extension/test_content_media.js $ct; if ($LASTEXITCODE) { exit 1 }
+            node tests/extension/test_bg_media.js $bg;      if ($LASTEXITCODE) { exit 1 }
+          }
+          # the two extension copies must stay identical
+          foreach ($f in 'background.js', 'content.js') {
+            if ((Get-FileHash "src/browser_ext/chrome/$f").Hash -ne (Get-FileHash "src/browser_ext/firefox/$f").Hash) { throw "$f differs" }
+          }
+
+      - name: Install Ninja
+        run: choco install ninja -y --no-progress
+
+      - name: Build (Release, MSVC x64)
+        shell: cmd
+        run: tools\dev_build.bat %GITHUB_WORKSPACE%\build_dev
+
+      - name: Build test programs
+        shell: cmd
+        run: |
+          call tests\native\mk.bat || exit /b 1
+          call tests\native\mkmedia.bat || exit /b 1
+
+      - name: Native tests
+        shell: pwsh
+        working-directory: tests/native
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $tmp = Join-Path $env:RUNNER_TEMP 'ndm-tests'; New-Item -ItemType Directory -Force $tmp | Out-Null
+          .\uitest.exe;          if ($LASTEXITCODE) { exit 1 }
+          .\plsrvtest.exe;       if ($LASTEXITCODE) { exit 1 }
+          .\mediatest.exe;       if ($LASTEXITCODE) { exit 1 }
+          .\uninsttest.exe $tmp; if ($LASTEXITCODE) { exit 1 }
+          .\qtest.exe $tmp;      if ($LASTEXITCODE) { exit 1 }

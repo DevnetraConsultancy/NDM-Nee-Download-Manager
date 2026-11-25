@@ -1,0 +1,64 @@
+{
+  "manifest_version": 3,
+  "name": "Nee Download Manager",
+  "short_name": "NDM",
+  "version": "1.0.5",
+  "description": "Send downloads, links and videos to Nee Download Manager. MIT License, (c) 2026 Devnetra Consultancy.",
+  "author": "Devnetra Consultancy",
+  "minimum_chrome_version": "116",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEArMPFDpCsWJdmJ3IUuIhqPfnjQgPBNFDl3lKzVMKK3BYA9fUVwsD6IqwdocGSh4SVIUg3iB5AVxzoZQlWCQ0nwfKQhOvkjvQ7H+gHl7Ir5M/nbZ5cxHtwPWyZSsuP3BXRxHSiiXdVlqV1PriU3bXR6BK1du8aa3kOBGsc22AcESJiPRKgJrwwizX20bzZoJUUiTd2VlIKGi5/0RKfext4f9o/6DkZRKN83vDsOEfk/q/Q4ZjrOnbBcFPWWfpVUFDdglBahExZx8Np5I5rUdn2C7TTwKwbLY63LaqSwJ1M59n0Zqf1fVILh6LMVT7f+rjitBFGj2FEZvIcVlOYDMZDRQIDAQAB",
+
+  "icons": {
+    "16":  "images/ndm16.png",
+    "32":  "images/ndm32.png",
+    "48":  "images/ndm48.png",
+    "128": "images/ndm128.png"
+  },
+
+  "action": {
+    "default_icon": {
+      "16":  "images/ndm16.png",
+      "32":  "images/ndm32.png",
+      "48":  "images/ndm48.png"
+    },
+    "default_title": "Nee Download Manager",
+    "default_popup": "popup.html"
+  },
+
+  "background": {
+    "service_worker": "background.js"
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ],
+
+  "permissions": [
+    "downloads",
+    "contextMenus",
+    "cookies",
+    "storage",
+    "notifications",
+    "nativeMessaging",
+    "webRequest",
+    "scripting"
+  ],
+
+  "host_permissions": [
+    "<all_urls>"
+  ],
+
+  "options_ui": {
+    "page": "captured.html",
+    "open_in_tab": true
+  },
+
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
+  }
+}

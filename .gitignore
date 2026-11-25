@@ -1,0 +1,34 @@
+# Private keys / signing material (never commit)
+keys/
+*.pem
+*.pfx
+*.p12
+*.key
+
+# Build output
+build*/
+dist/
+*.obj
+*.pdb
+*.ilk
+*.exp
+*.lib
+
+# Large third-party binaries (fetched by tools/fetch_*.ps1)
+third_party/*.exe
+third_party/*.dll
+
+# IDE
+.vs/
+.vscode/
+
+# Original README kept locally (contains third-party analysis references)
+README.original.md
+
+# Local tool caches
+.impeccable/
+*.log
+
+# Test binaries
+tests/native/*.exe
+tests/native/*.obj
