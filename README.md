@@ -1,12 +1,12 @@
 <div align="center">
 
-<img src="docs/images/banner.png" alt="Nee Download Manager — fast, free and open-source download manager for Windows" width="100%">
+<img src="docs/images/hero.png" alt="Nee Download Manager — fast, free and open-source download manager for Windows" width="100%">
 
-# Nee Download Manager (NDM)
+<br><br>
 
-**A fast, free and open-source download manager for Windows — multi-connection downloads,
-one-click video / audio / photo saving from almost any site, torrents and a real scheduler.
-No ads, no trial, no account.**
+<a href="https://github.com/DevnetraConsultancy/nee-download-manager/releases/latest"><img src="docs/images/button.png" alt="Download NDM 1.0.5 for Windows" height="56"></a>
+
+<br><br>
 
 [![Latest release](https://img.shields.io/github/v/release/DevnetraConsultancy/nee-download-manager?label=release&color=E8B640&style=flat-square)](https://github.com/DevnetraConsultancy/nee-download-manager/releases/latest)
 [![Downloads](https://img.shields.io/github/downloads/DevnetraConsultancy/nee-download-manager/total?color=E8B640&style=flat-square)](https://github.com/DevnetraConsultancy/nee-download-manager/releases)
@@ -16,13 +16,13 @@ No ads, no trial, no account.**
 [![C++17](https://img.shields.io/badge/C%2B%2B17-Win32%20native-00599C?style=flat-square&logo=cplusplus&logoColor=white)](#build-from-source)
 [![Stars](https://img.shields.io/github/stars/DevnetraConsultancy/nee-download-manager?style=flat-square&color=E8B640)](https://github.com/DevnetraConsultancy/nee-download-manager/stargazers)
 
-[**Download NDM 1.0.5**](https://github.com/DevnetraConsultancy/nee-download-manager/releases/latest) ·
-[Features](#features) · [Screenshots](#screenshots) · [Compared with IDM](#compared-with-idm) ·
-[Install](#install) · [Build](#build-from-source) · [FAQ](#faq)
+<sub>[Features](#features) &nbsp;·&nbsp; [Screenshots](#screenshots) &nbsp;·&nbsp; [Compared with IDM](#compared-with-idm) &nbsp;·&nbsp; [Install](#install) &nbsp;·&nbsp; [Build](#build-from-source) &nbsp;·&nbsp; [FAQ](#faq)</sub>
+
+<br>
+
+<img src="docs/images/stats.png" alt="32 connections per file · 1000+ video and audio sites · 0 ads, trials or telemetry · 450+ automated checks per push" width="100%">
 
 </div>
-
----
 
 ## Why NDM
 
@@ -37,6 +37,11 @@ list shows the actual codec and bitrate of each track, sizes marked `~` are esti
 and unknown sizes stay blank. Nothing is invented to look good.
 
 ## Features
+
+<img src="docs/images/features.png" alt="Features: fast safe downloads, video audio photos, browser integration, full control, real scheduler, torrents built in" width="100%">
+
+<details>
+<summary><b>Full feature list</b></summary>
 
 <table>
 <tr>
@@ -103,6 +108,8 @@ and unknown sizes stay blank. Nothing is invented to look good.
 </tr>
 </table>
 
+</details>
+
 ## Screenshots
 
 > Site content behind NDM's controls is blurred on purpose. The red numbers point at NDM's own controls.
@@ -134,6 +141,11 @@ and unknown sizes stay blank. Nothing is invented to look good.
 Internet Download Manager is the best-known download manager on Windows. Here is a
 factual, feature-by-feature comparison. If you spot an error, please open an issue.
 
+<img src="docs/images/compare.png" alt="Feature comparison of NDM and IDM" width="100%">
+
+<details>
+<summary><b>Same table as text</b></summary>
+
 | | NDM | IDM |
 |---|:---:|:---:|
 | Price | <img src="docs/icons/check.svg" width="16"> Free | Paid licence (trial first) |
@@ -154,6 +166,8 @@ factual, feature-by-feature comparison. If you spot an error, please open an iss
 | Signed installer | <img src="docs/icons/x.svg" width="16"> Not yet | <img src="docs/icons/check.svg" width="16"> |
 | Firefox add-on that stays installed | <img src="docs/icons/minus.svg" width="16"> Temporary for now | <img src="docs/icons/check.svg" width="16"> |
 | Site grabber (crawl a whole site) | <img src="docs/icons/minus.svg" width="16"> Page links only | <img src="docs/icons/check.svg" width="16"> |
+
+</details>
 
 <sub>IDM and Internet Download Manager are trademarks of Tonec Inc. NDM is an independent
 project and is not affiliated with, endorsed by or derived from Tonec Inc. or IDM.
@@ -235,12 +249,7 @@ More than 450 automated checks run on every push ([CI](.github/workflows/ci.yml)
 
 ## How it works
 
-```
-Browser extension ──native messaging──> NDMMsgHost.exe ──per-user pipe──> NDMan.exe
-                                                                          ├─ WinHTTP segmented engine
-                                                                          ├─ yt-dlp + FFmpeg (video / audio)
-                                                                          └─ aria2 (torrents, local JSON-RPC)
-```
+<img src="docs/images/arch.png" alt="Browser extension talks to NDMMsgHost.exe over native messaging, which talks to NDMan.exe over a per-user pipe; NDMan runs the WinHTTP engine, yt-dlp + FFmpeg and aria2" width="100%">
 
 ```
 src/
