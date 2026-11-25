@@ -288,6 +288,18 @@ static void Offline(const std::wstring& dir, const wchar_t* exe)
           L"RenameDownload: refused while a .ndmpart exists");
     DeleteFileW((dir + L"\\y.zip.ndmpart").c_str());
     CHECK(!Q.RenameDownload(99999, L"q.bin", rmsg), L"RenameDownload: unknown id fails");
+
+    wprintf(L"relocate (file dragged out of NDM)\n");
+    std::wstring moved = dir + L"\\moved";
+    CreateDirectoryW(moved.c_str(), nullptr);
+    CHECK(MoveFileExW((dir + L"\\renamed.bin").c_str(), (moved + L"\\renamed.bin").c_str(), 0) &&
+          Q.RelocateCompleted(8, moved + L"\\renamed.bin") && Snap(8).savePath == moved &&
+          Snap(8).filename == L"renamed.bin", L"RelocateCompleted: item follows its moved file");
+    CHECK(!Q.RelocateCompleted(8, moved + L"\\missing.bin") && Snap(8).savePath == moved,
+          L"RelocateCompleted: a path that does not exist is refused");
+    CHECK(!Q.RelocateCompleted(7, moved + L"\\renamed.bin") && Snap(7).filename == L"a.zip",
+          L"RelocateCompleted: unfinished item refused");
+    CHECK(!Q.RelocateCompleted(99999, moved + L"\\renamed.bin"), L"RelocateCompleted: unknown id fails");
     Q.RemoveDownload(mid);
 
     SchedulerMath();

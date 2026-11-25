@@ -8,6 +8,7 @@
 // double buffer; the ListView rows and its column header are custom drawn.
 
 #include "ndm_mainwnd.h"
+#include "ndm_filedrag.h"
 #include "ndm_adddlg.h"
 #include "ndm_optdlg.h"
 #include "ndm_progdlg.h"
@@ -183,7 +184,7 @@ namespace
     private:
         DWORD Effect(DWORD allowed) const
         {
-            if (m_items.empty()) return DROPEFFECT_NONE;
+            if (m_items.empty() || NdmFileDrag::Active()) return DROPEFFECT_NONE;   // our own drag-out
             if (allowed & DROPEFFECT_COPY) return DROPEFFECT_COPY;
             if (allowed & DROPEFFECT_LINK) return DROPEFFECT_LINK;
             return DROPEFFECT_NONE;
@@ -647,6 +648,9 @@ LRESULT NdmMainWindow::Handle(UINT msg, WPARAM wp, LPARAM lp)
                 return 0;
             case LVN_COLUMNCLICK:
                 OnColumnClick(((NMLISTVIEW*)lp)->iSubItem);
+                return 0;
+            case LVN_BEGINDRAG:
+                DragOutFiles(((NMLISTVIEW*)lp)->iItem);
                 return 0;
             case NM_DBLCLK:
                 if (((NMITEMACTIVATE*)lp)->iItem >= 0) CmdDefault();
@@ -2281,6 +2285,37 @@ void NdmMainWindow::CmdOpenFolder()
     std::wstring d = NdmConfigMgr::GetInstance().GetSavePath();
     EnsureFolder(d);
     OpenFolderSelect(d, L"");
+}
+
+// Drag finished files out of the list (Explorer, desktop, other apps).
+// The row under the mouse leads: its folder decides which selected files
+// go along (one drag = one folder). Plain drag moves, Shift + drag copies.
+void NdmMainWindow::DragOutFiles(int item)
+{
+    if (item < 0 || item >= (int)m_view.size()) return;
+    const Row& lead = m_all[m_view[item]];
+    if (lead.status != NDM_STATUS_COMPLETED || lead.name.empty()) return;
+    auto pathOf = [](const Row& r)
+    {
+        return JoinPath(r.savePath.empty() ? NdmConfigMgr::GetInstance().GetSavePath() : r.savePath, r.name);
+    };
+    std::vector<NdmFileDrag::Item> items;
+    NdmFileDrag::Item first;
+    first.id = lead.id;
+    first.path = pathOf(lead);
+    items.push_back(first);
+    for (DWORD id : SelectedIds())
+    {
+        const Row* r = RowById(id);
+        if (!r || r->id == lead.id || r->status != NDM_STATUS_COMPLETED || r->name.empty()) continue;
+        NdmFileDrag::Item it;
+        it.id = r->id;
+        it.path = pathOf(*r);
+        items.push_back(it);
+        if (items.size() >= 256) break;
+    }
+    NdmFileDrag::Drag(m_hWnd, items);
+    Refresh(true);
 }
 
 void NdmMainWindow::CmdOpen()

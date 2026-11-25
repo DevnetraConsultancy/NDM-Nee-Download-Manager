@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.20)
-project(NDM VERSION 1.0.5 LANGUAGES CXX)
+project(NDM VERSION 1.0.6 LANGUAGES CXX)
 if(MSVC)
     enable_language(RC)
 endif()
@@ -147,6 +147,8 @@ add_executable(NDMan WIN32
     src/ui/ndm_optdlg.h
     src/ui/ndm_progdlg.cpp
     src/ui/ndm_progdlg.h
+    src/ui/ndm_filedrag.cpp
+    src/ui/ndm_filedrag.h
     src/ui/ndm_theme.cpp
     src/ui/ndm_theme.h
     src/ui/ndm_firstrun.cpp

@@ -1442,6 +1442,35 @@ bool NdmQueue::RenameDownload(DWORD id, const std::wstring& newNameIn, std::wstr
     return ok;
 }
 
+bool NdmQueue::RelocateCompleted(DWORD id, const std::wstring& newFullPath)
+{
+    const size_t k = newFullPath.find_last_of(L"\\/");
+    if (k == std::wstring::npos || k == 0 || k + 1 >= newFullPath.size()) return false;
+    if (GetFileAttributesW(newFullPath.c_str()) == INVALID_FILE_ATTRIBUTES) return false;
+    std::wstring dir = newFullPath.substr(0, k), name = newFullPath.substr(k + 1);
+    if (dir.size() == 2 && dir[1] == L':') dir += L'\\';          // "D:" -> "D:\"
+    bool ok = false;
+    EnterCriticalSection(&m_cs);
+    auto it = m_downloads.find(id);
+    if (it != m_downloads.end())
+    {
+        NdmDownload* dl = it->second;
+        if (dl->status == NDM_STATUS_COMPLETED && !m_running.count(dl))
+        {
+            if (_wcsicmp(NdmHttpEngine::GetSharedString(dl->filename).c_str(), name.c_str()) != 0)
+            {
+                NdmHttpEngine::SetSharedString(dl->filename, name);
+                m_userNamed.insert(id);
+            }
+            dl->savePath = dir;
+            ok = true;
+        }
+    }
+    LeaveCriticalSection(&m_cs);
+    if (ok) AutoSave();
+    return ok;
+}
+
 // ---------------------------------------------------------------------------
 // Refresh download address
 // ---------------------------------------------------------------------------

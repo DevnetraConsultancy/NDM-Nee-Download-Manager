@@ -150,6 +150,11 @@ public:
     // -----------------------------------------------------------------------
     bool RenameDownload(DWORD id, const std::wstring& newName, std::wstring& msg);
 
+    // A finished download's file (or torrent folder) was moved elsewhere by
+    // the user (dragged out of NDM): the item follows it. Only completed,
+    // not running items; newFullPath must exist. Keeps the queue saved.
+    bool RelocateCompleted(DWORD id, const std::wstring& newFullPath);
+
     // -----------------------------------------------------------------------
     // Refresh download address. Probes newUrl (no body download), checks it
     // is the same file as the part on disk (or as the known size), then sets

@@ -19,6 +19,9 @@
 //     [Nothing][Sleep][Hibernate][Shut down]
 //   ------------------------------------------------
 //                                  [Pause] [Cancel]
+//   finished:  [Close] [::icon name::] [Open Folder] [Open]
+//   The tile left of Open Folder can be dragged anywhere: a plain drag
+//   moves the file, Shift + drag copies it (ndm_filedrag).
 //
 // Tabs: click, Ctrl+Tab / Ctrl+Shift+Tab anywhere, or Left / Right / Home /
 // End while the tab strip has the focus (it is a tab stop).
@@ -28,6 +31,7 @@
 #include "ndm_uilogic.h"
 #include "ndm_power.h"
 #include "ndm_mainwnd.h"
+#include "ndm_filedrag.h"
 #include "../core/ndm_queue.h"
 #include "../core/ndm_config.h"
 
@@ -41,6 +45,7 @@ namespace
 {
     const wchar_t* kClass    = L"NDMProgressWnd";
     const wchar_t* kTabClass = L"NDMProgressTabs";
+    const wchar_t* kTileClass = L"NDMDragTile";
     const int kW = 440, kTabH = 30, kH = 232 + kTabH;
     const int kM = 14;
     const int kRowY = 38 + kTabH, kRowH = 19, kRows = 6, kKeyW = 108;
@@ -55,7 +60,7 @@ namespace
 
     enum
     {
-        IDC_PAUSE = 400, IDC_CANCELDL, IDC_OPEN, IDC_OPENDIR, IDC_CLOSE, IDC_TABS,
+        IDC_PAUSE = 400, IDC_CANCELDL, IDC_OPEN, IDC_OPENDIR, IDC_CLOSE, IDC_TABS, IDC_DRAG,
         IDC_LIMIT, IDC_LIMITEDIT, IDC_UNIT_KB, IDC_UNIT_MB,
         IDC_PRIO0 = 420,                        // + NDM_PRIO_*
         IDC_ACT0  = 430                         // + NDM_DONE_*
@@ -81,7 +86,11 @@ namespace
         int       setting = 0;        // >0 while text is set programmatically
         HWND hPause = nullptr, hCancel = nullptr,
              hOpen = nullptr, hOpenDir = nullptr, hClose = nullptr, hTabs = nullptr,
-             hLimit = nullptr, hLimitEdit = nullptr, hKB = nullptr, hMB = nullptr;
+             hLimit = nullptr, hLimitEdit = nullptr, hKB = nullptr, hMB = nullptr,
+             hDrag = nullptr, hTip = nullptr;
+        std::wstring dragPath;        // file the drag tile stands for
+        HICON     dragIcon = nullptr;
+        bool      dragHot = false;
         HWND hPrio[3] = {};
         HWND hAct[4] = {};
         RECT rcLimit{};
@@ -289,7 +298,9 @@ namespace
         {
             place(c->hOpen, c->S(84), x);
             place(c->hOpenDir, c->S(104), x);
-            place(c->hClose, c->S(72), x);
+            int cx = c->S(kM) + c->S(72);
+            MoveWindow(c->hClose, c->S(kM), by, c->S(72), bh, TRUE);
+            MoveWindow(c->hDrag, cx + c->S(8), by, (std::max)(c->S(40), x - cx - c->S(8)), bh, TRUE);
         }
         else
         {
@@ -335,6 +346,115 @@ namespace
         SendMessageW(c->hLimit, WM_SETFONT, (WPARAM)c->res.ui, FALSE);
     }
 
+    // ---------------------------------------------------------------------
+    // Drag tile (finished downloads): file icon + name, drag it anywhere
+    // ---------------------------------------------------------------------
+    void UpdateDragTile(Ctx* c, bool done)
+    {
+        if (!c->hDrag) return;
+        std::wstring p;
+        if (done && !c->snap.filename.empty())
+            p = JoinPath(c->snap.savePath.empty() ? NdmConfigMgr::GetInstance().GetSavePath()
+                                                  : c->snap.savePath, c->snap.filename);
+        const bool show = !p.empty() && GetFileAttributesW(p.c_str()) != INVALID_FILE_ATTRIBUTES;
+        if (show && p != c->dragPath)
+        {
+            c->dragPath = p;
+            if (c->dragIcon) DestroyIcon(c->dragIcon);
+            c->dragIcon = nullptr;
+            SHFILEINFOW fi = {};
+            if (SHGetFileInfoW(p.c_str(), 0, &fi, sizeof(fi), SHGFI_ICON | SHGFI_SMALLICON))
+                c->dragIcon = fi.hIcon;
+            InvalidateRect(c->hDrag, nullptr, FALSE);
+        }
+        if (!!IsWindowVisible(c->hDrag) != show)
+            ShowWindow(c->hDrag, show ? SW_SHOWNA : SW_HIDE);
+    }
+
+    LRESULT CALLBACK TileProc(HWND h, UINT m, WPARAM w, LPARAM l)
+    {
+        Ctx* c = Get(GetParent(h));
+        if (!c) return DefWindowProcW(h, m, w, l);
+        switch (m)
+        {
+        case WM_MOUSEMOVE:
+            if (!c->dragHot)
+            {
+                c->dragHot = true;
+                InvalidateRect(h, nullptr, FALSE);
+                TRACKMOUSEEVENT t = { sizeof(t), TME_LEAVE, h, 0 };
+                TrackMouseEvent(&t);
+            }
+            return 0;
+        case WM_MOUSELEAVE:
+            c->dragHot = false;
+            InvalidateRect(h, nullptr, FALSE);
+            return 0;
+        case WM_SETCURSOR:
+            SetCursor(LoadCursorW(nullptr, IDC_SIZEALL));
+            return TRUE;
+        case WM_LBUTTONDOWN:
+        {
+            POINT pt = { (short)LOWORD(l), (short)HIWORD(l) };
+            ClientToScreen(h, &pt);
+            if (!c->dragPath.empty() && DragDetect(h, pt))
+            {
+                NdmFileDrag::Item it;
+                it.id = c->id;
+                it.path = c->dragPath;
+                NdmFileDrag::Drag(c->hwnd, { it });
+                c->dragHot = false;
+                InvalidateRect(h, nullptr, FALSE);
+            }
+            return 0;
+        }
+        case WM_ERASEBKGND:
+            return 1;
+        case WM_PAINT:
+        {
+            PAINTSTRUCT ps;
+            HDC hdc = BeginPaint(h, &ps);
+            RECT cl; GetClientRect(h, &cl);
+            {
+                NdmMemDC mem(hdc, cl);
+                HDC dc = mem.ok() ? mem.dc : hdc;
+                Fill(dc, cl, kFootBg);
+                RECT r = cl;
+                RoundFill(dc, r, c->S(6), c->dragHot ? NDM_CLR_BG_HOVER : NDM_CLR_BG_PANEL);
+                RoundFrame(dc, r, c->S(6), c->dragHot ? NDM_CLR_BORDER_GOLD : NDM_CLR_BORDER);
+                // grip: two columns of three dots
+                int gx = r.left + c->S(8), gy = (r.top + r.bottom) / 2, d = c->S(4);
+                for (int col = 0; col < 2; ++col)
+                    for (int row = -1; row <= 1; ++row)
+                        Circle(dc, gx + col * d, gy + row * d, (std::max)(1, c->S(1)),
+                               c->dragHot ? NDM_CLR_GOLD : NDM_CLR_FG_DIM);
+                int ix = gx + d + c->S(9), is = c->S(16);
+                if (c->dragIcon)
+                    DrawIconEx(dc, ix, gy - is / 2, c->dragIcon, is, is, 0, nullptr, DI_NORMAL);
+                RECT t = { ix + is + c->S(7), r.top, r.right - c->S(8), r.bottom };
+                size_t k = c->dragPath.find_last_of(L"\\/");
+                std::wstring name = k == std::wstring::npos ? c->dragPath : c->dragPath.substr(k + 1);
+                // too long: shorten the middle, keep the extension ("Aesth….mp4")
+                const int avail = t.right - t.left;
+                if (MeasureText(dc, name, c->res.ui).cx > avail)
+                {
+                    size_t dot = name.find_last_of(L'.');
+                    std::wstring ext = (dot != std::wstring::npos && name.size() - dot <= 8) ? name.substr(dot) : L"";
+                    std::wstring stem = name.substr(0, name.size() - ext.size());
+                    while (!stem.empty() && MeasureText(dc, stem + L"…" + ext, c->res.ui).cx > avail)
+                        stem.pop_back();
+                    name = stem + L"…" + ext;
+                }
+                Text(dc, name, t, c->dragHot ? NDM_CLR_FG : NDM_CLR_FG_DIM, c->res.ui,
+                     DT_LEFT | DT_VCENTER | DT_SINGLELINE | DT_END_ELLIPSIS | DT_NOPREFIX);
+            }
+            EndPaint(h, &ps);
+            return 0;
+        }
+        }
+        return DefWindowProcW(h, m, w, l);
+    }
+
     void ApplyState(Ctx* c)
     {
         int st = c->have ? StateOf(c->snap.status) : 0;
@@ -344,6 +464,7 @@ namespace
         ShowWindow(c->hClose,   done ? SW_SHOW : SW_HIDE);
         ShowWindow(c->hPause,   done ? SW_HIDE : SW_SHOW);
         ShowWindow(c->hCancel,  done ? SW_HIDE : SW_SHOW);
+        UpdateDragTile(c, done);
 
         bool running = c->have && (c->snap.status == NDM_STATUS_DOWNLOADING ||
                                    c->snap.status == NDM_STATUS_QUEUED);
@@ -687,6 +808,22 @@ namespace
             c->hOpen    = MakeBtn(h, IDC_OPEN,     L"Open");
             c->hOpenDir = MakeBtn(h, IDC_OPENDIR,  L"Open Folder");
             c->hClose   = MakeBtn(h, IDC_CLOSE,    L"Close");
+            c->hDrag    = CreateWindowExW(0, kTileClass, L"", WS_CHILD, 0, 0, 10, 10, h,
+                                          (HMENU)(INT_PTR)IDC_DRAG, hi, nullptr);
+            SetAccName(c->hDrag, L"Drag the file anywhere");
+            c->hTip = CreateWindowExW(WS_EX_TOPMOST, TOOLTIPS_CLASSW, nullptr,
+                                      WS_POPUP | TTS_ALWAYSTIP | TTS_NOPREFIX, 0, 0, 0, 0, h, nullptr, hi, nullptr);
+            if (c->hTip && c->hDrag)
+            {
+                DarkTooltip(c->hTip);
+                TOOLINFOW ti = { sizeof(ti) };
+                ti.uFlags   = TTF_SUBCLASS | TTF_IDISHWND;
+                ti.hwnd     = h;
+                ti.uId      = (UINT_PTR)c->hDrag;
+                ti.lpszText = const_cast<wchar_t*>(L"Drag the file anywhere to move it.\nHold Shift while you drag to copy it.");
+                SendMessageW(c->hTip, TTM_SETMAXTIPWIDTH, 0, 400);
+                SendMessageW(c->hTip, TTM_ADDTOOLW, 0, (LPARAM)&ti);
+            }
             SendMessageW(c->hLimitEdit, EM_LIMITTEXT, 9, 0);
             Poll(c);
             LoadLimit(c);
@@ -781,6 +918,7 @@ namespace
             if (c)
             {
                 c->res.Free();
+                if (c->dragIcon) DestroyIcon(c->dragIcon);
                 delete c;
                 SetWindowLongPtrW(h, GWLP_USERDATA, 0);
             }
@@ -817,7 +955,13 @@ void NdmProgressDlg::Show(HWND owner, DWORD id)
         tc.hCursor       = LoadCursorW(nullptr, IDC_ARROW);
         tc.lpszClassName = kTabClass;
         bool b = RegisterClassExW(&tc) != 0 || GetLastError() == ERROR_CLASS_ALREADY_EXISTS;
-        reg = a && b;
+        WNDCLASSEXW dc = { sizeof(dc) };
+        dc.lpfnWndProc   = TileProc;
+        dc.hInstance     = hi;
+        dc.hCursor       = LoadCursorW(nullptr, IDC_SIZEALL);
+        dc.lpszClassName = kTileClass;
+        bool d = RegisterClassExW(&dc) != 0 || GetLastError() == ERROR_CLASS_ALREADY_EXISTS;
+        reg = a && b && d;
     }
     Ctx* c = new Ctx();
     c->id = id;

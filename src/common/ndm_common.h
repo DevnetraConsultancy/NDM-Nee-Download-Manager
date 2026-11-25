@@ -13,8 +13,8 @@
 #define NDM_VERSION_MAJOR   1
 #define NDM_VERSION_MINOR   0
 #define NDM_VERSION_BUILD   1
-#define NDM_VERSION_STR     "1.0.5"
-#define NDM_VERSION_STR_W   L"1.0.5"
+#define NDM_VERSION_STR     "1.0.6"
+#define NDM_VERSION_STR_W   L"1.0.6"
 
 #define NDM_PRODUCT_NAME    L"Nee Download Manager"
 #define NDM_EXE_NAME        L"NDMan.exe"

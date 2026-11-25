@@ -5,7 +5,7 @@
 // 4-byte little-endian length prefix on both the stdio and the pipe leg):
 //
 //   -> {"id":7,"action":"ping"}
-//   <- {"id":7,"status":"ok","app":"NDM","version":"1.0.5","running":true,"capture":true}
+//   <- {"id":7,"status":"ok","app":"NDM","version":"1.0.6","running":true,"capture":true}
 //   "capture": automatic browser capture is on in NDM Options (registry
 //   mirror BrowserMonitor; answered by the relay too when NDMan is down).
 //

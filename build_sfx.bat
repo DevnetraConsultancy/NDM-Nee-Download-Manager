@@ -1,7 +1,7 @@
 @echo off
 REM =========================================================
 REM NDM Full SFX Build (x64)
-REM Produces: dist\NDM-1.0.5-x64-Setup.exe  (single standalone EXE)
+REM Produces: dist\NDM-1.0.6-x64-Setup.exe  (single standalone EXE)
 REM
 REM Usage: build_sfx.bat [output.exe]
 REM   Bundles third_party\*.exe (+ licence texts) into <install>\tools\,
@@ -26,7 +26,7 @@ setlocal EnableExtensions
 
 set "ROOT=%~dp0"
 set "OUTEXE=%~1"
-if "%OUTEXE%"=="" set "OUTEXE=%ROOT%dist\NDM-1.0.5-x64-Setup.exe"
+if "%OUTEXE%"=="" set "OUTEXE=%ROOT%dist\NDM-1.0.6-x64-Setup.exe"
 set "BUILD=%NDM_BUILD_DIR%"
 if "%BUILD%"=="" set "BUILD=%ROOT%build"
 

@@ -52,7 +52,7 @@
 // Constants
 // ---------------------------------------------------------------------------
 #define NDM_SETUP_MUTEX     "NDM_Setup_Mutex_k7pX3nW8"
-#define NDM_VERSION_WIDE    L"1.0.5"
+#define NDM_VERSION_WIDE    L"1.0.6"
 #define NDM_VERSION_MAJOR   1
 #define NDM_VERSION_MINOR   0
 #define NDM_PUBLISHER       L"Devnetra Consultancy"

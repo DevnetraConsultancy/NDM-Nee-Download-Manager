@@ -232,6 +232,7 @@ private:
     void  CmdDelete();
     void  CmdOpenFolder();
     void  CmdOpen();
+    void  DragOutFiles(int item);   // LVN_BEGINDRAG: finished files to Explorer / apps
     void  CmdRedownload();
     void  CmdCopyUrl();
     void  CmdProperties();

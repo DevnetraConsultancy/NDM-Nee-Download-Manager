@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.6 — 2026-11-25
+
+### New
+- Drag a finished file out of NDM, as in IDM: a file tile next to **Open Folder** in the download window, and finished rows in the main list, can be dragged onto any folder, the desktop or an app.
+- A plain drag **moves** the file; holding **Shift** when the drag starts **copies** it. Apps that only read files (mail, chat, editors) always get a copy.
+- After a move NDM follows the file, also to another drive, so Open and Open Folder keep working.
+
 ## 1.0.5 — 2026-11-25
 
 First public release.

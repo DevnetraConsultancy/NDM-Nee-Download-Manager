@@ -17,7 +17,7 @@
 # Usage:
 #   powershell -ExecutionPolicy Bypass -File make_sfx_payload.ps1 `
 #       -StubExe   "build\bin\ndmsetup643build1.exe" `
-#       -OutputExe "dist\NDM-1.0.5-x64-Setup.exe"    `
+#       -OutputExe "dist\NDM-1.0.6-x64-Setup.exe"    `
 #       -BinDir    "build\bin"                        `
 #       -ExtDir    "src\browser_ext"                  `
 #       [-ThirdPartyDir "third_party"] [-ExtraFile <path>[,<path>...]] [-BlockSizeMB 8]

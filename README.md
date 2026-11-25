@@ -4,7 +4,7 @@
 
 <br><br>
 
-<a href="https://github.com/DevnetraConsultancy/nee-download-manager/releases/latest"><img src="docs/images/button.png" alt="Download NDM 1.0.5 for Windows" height="56"></a>
+<a href="https://github.com/DevnetraConsultancy/nee-download-manager/releases/latest"><img src="docs/images/button.png" alt="Download NDM 1.0.6 for Windows" height="56"></a>
 
 [![Latest release](https://img.shields.io/github/v/release/DevnetraConsultancy/nee-download-manager?label=release&color=E8B640&style=flat-square)](https://github.com/DevnetraConsultancy/nee-download-manager/releases/latest)
 [![Downloads](https://img.shields.io/github/downloads/DevnetraConsultancy/nee-download-manager/total?color=E8B640&style=flat-square)](https://github.com/DevnetraConsultancy/nee-download-manager/releases)
@@ -83,6 +83,7 @@ and unknown sizes stay blank. Nothing is invented to look good.
 - **Scheduler**: start and stop times, days of the week, one-off dates, max simultaneous downloads
 - When done: Sleep, Hibernate or Shut down — with a 30-second cancel window
 - Queue order, search, Date column, categories
+- **Drag finished files out** of the download window or the list: a plain drag moves the file (NDM follows it), Shift + drag copies it
 
 </td>
 </tr>
@@ -115,6 +116,8 @@ and unknown sizes stay blank. Nothing is invented to look good.
 <table>
 <tr><td align="center"><img src="docs/images/app-main.png" alt="NDM main window" width="100%"><br><sub>Main window — categories, Date column, live status bar</sub></td></tr>
 </table>
+
+<img src="docs/images/drag-out.png" alt="Drag a finished file from the download window or the list onto a folder, the desktop or an app: a plain drag moves it, Shift + drag copies it" width="100%">
 
 <img src="docs/images/legend.png" alt="What the numbers mean: 1 download button, 2 best quality first, 3 real audio tracks, 5 photo button, 6 download window, 7 completion notice, 8 save dialog" width="100%">
 
@@ -201,7 +204,7 @@ Comparison made in November 2026 from public information; corrections are welcom
 
 ## Install
 
-1. Download **`NDM-1.0.5-x64-Setup.exe`** from the [latest release](https://github.com/DevnetraConsultancy/nee-download-manager/releases/latest) and run it. It installs offline to `C:\Program Files\Devnetra\NDM` and shows up in *Apps & features* (also in tools such as Revo Uninstaller).
+1. Download **`NDM-1.0.6-x64-Setup.exe`** from the [latest release](https://github.com/DevnetraConsultancy/nee-download-manager/releases/latest) and run it. It installs offline to `C:\Program Files\Devnetra\NDM` and shows up in *Apps & features* (also in tools such as Revo Uninstaller).
    SmartScreen may say *Windows protected your PC* because the installer is not signed yet: choose **More info → Run anyway**. You can check the file against the SHA-256 on the release page.
 2. On first start NDM asks whether to start with Windows and to capture browser downloads.
 
@@ -225,7 +228,7 @@ Requirements: Visual Studio 2022 Build Tools (C++ x64), CMake 3.20+, Ninja, Powe
 powershell -ExecutionPolicy Bypass -File tools\fetch_tools.ps1
 powershell -ExecutionPolicy Bypass -File tools\fetch_aria2.ps1
 
-# full build + offline installer -> dist\NDM-1.0.5-x64-Setup.exe
+# full build + offline installer -> dist\NDM-1.0.6-x64-Setup.exe
 build_sfx.bat
 
 # developer build only (no installer)
