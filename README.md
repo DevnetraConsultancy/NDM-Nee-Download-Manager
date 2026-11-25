@@ -4,15 +4,15 @@
 
 <br><br>
 
-<a href="https://github.com/DevnetraConsultancy/nee-download-manager/releases/latest"><img src="docs/images/button.png" alt="Download NDM 1.0.6 for Windows" height="56"></a>
+<a href="https://github.com/DevnetraConsultancy/NDM-Nee-Download-Manager/releases/latest"><img src="docs/images/button.png" alt="Download NDM 1.0.6 for Windows" height="56"></a>
 
-[![Latest release](https://img.shields.io/github/v/release/DevnetraConsultancy/nee-download-manager?label=release&color=E8B640&style=flat-square)](https://github.com/DevnetraConsultancy/nee-download-manager/releases/latest)
-[![Downloads](https://img.shields.io/github/downloads/DevnetraConsultancy/nee-download-manager/total?color=E8B640&style=flat-square)](https://github.com/DevnetraConsultancy/nee-download-manager/releases)
-[![Build](https://img.shields.io/github/actions/workflow/status/DevnetraConsultancy/nee-download-manager/ci.yml?branch=main&label=build%20%26%20tests&style=flat-square)](https://github.com/DevnetraConsultancy/nee-download-manager/actions/workflows/ci.yml)
+[![Latest release](https://img.shields.io/github/v/release/DevnetraConsultancy/NDM-Nee-Download-Manager?label=release&color=E8B640&style=flat-square)](https://github.com/DevnetraConsultancy/NDM-Nee-Download-Manager/releases/latest)
+[![Downloads](https://img.shields.io/github/downloads/DevnetraConsultancy/NDM-Nee-Download-Manager/total?color=E8B640&style=flat-square)](https://github.com/DevnetraConsultancy/NDM-Nee-Download-Manager/releases)
+[![Build](https://img.shields.io/github/actions/workflow/status/DevnetraConsultancy/NDM-Nee-Download-Manager/ci.yml?branch=main&label=build%20%26%20tests&style=flat-square)](https://github.com/DevnetraConsultancy/NDM-Nee-Download-Manager/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-3FB950?style=flat-square)](LICENSE)
 [![Platform](https://img.shields.io/badge/Windows%2010%20%7C%2011-x64-0078D4?style=flat-square&logo=windows&logoColor=white)](#install)
 [![C++17](https://img.shields.io/badge/C%2B%2B17-Win32%20native-00599C?style=flat-square&logo=cplusplus&logoColor=white)](#build-from-source)
-[![Stars](https://img.shields.io/github/stars/DevnetraConsultancy/nee-download-manager?style=flat-square&color=E8B640)](https://github.com/DevnetraConsultancy/nee-download-manager/stargazers)
+[![Stars](https://img.shields.io/github/stars/DevnetraConsultancy/NDM-Nee-Download-Manager?style=flat-square&color=E8B640)](https://github.com/DevnetraConsultancy/NDM-Nee-Download-Manager/stargazers)
 
 <sub>[Features](#features) &nbsp;·&nbsp; [Screenshots](#screenshots) &nbsp;·&nbsp; [Compared with IDM](#compared-with-idm) &nbsp;·&nbsp; [Install](#install) &nbsp;·&nbsp; [Build](#build-from-source) &nbsp;·&nbsp; [FAQ](#faq)</sub>
 
@@ -204,7 +204,7 @@ Comparison made in November 2026 from public information; corrections are welcom
 
 ## Install
 
-1. Download **`NDM-1.0.6-x64-Setup.exe`** from the [latest release](https://github.com/DevnetraConsultancy/nee-download-manager/releases/latest) and run it. It installs offline to `C:\Program Files\Devnetra\NDM` and shows up in *Apps & features* (also in tools such as Revo Uninstaller).
+1. Download **`NDM-1.0.6-x64-Setup.exe`** from the [latest release](https://github.com/DevnetraConsultancy/NDM-Nee-Download-Manager/releases/latest) and run it. It installs offline to `C:\Program Files\Devnetra\NDM` and shows up in *Apps & features* (also in tools such as Revo Uninstaller).
    SmartScreen may say *Windows protected your PC* because the installer is not signed yet: choose **More info → Run anyway**. You can check the file against the SHA-256 on the release page.
 2. On first start NDM asks whether to start with Windows and to capture browser downloads.
 

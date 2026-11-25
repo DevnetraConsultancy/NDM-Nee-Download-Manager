@@ -7,7 +7,7 @@ Only the latest release receives security fixes.
 ## Reporting a vulnerability
 
 Please do not open a public issue. Report privately through
-[GitHub security advisories](https://github.com/DevnetraConsultancy/nee-download-manager/security/advisories/new)
+[GitHub security advisories](https://github.com/DevnetraConsultancy/NDM-Nee-Download-Manager/security/advisories/new)
 or by email to devnetraconsultancy@gmail.com.
 
 Include the version, a description, and steps or a proof of concept. You will get an
