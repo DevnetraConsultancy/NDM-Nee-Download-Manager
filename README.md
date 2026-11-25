@@ -6,8 +6,6 @@
 
 <a href="https://github.com/DevnetraConsultancy/nee-download-manager/releases/latest"><img src="docs/images/button.png" alt="Download NDM 1.0.5 for Windows" height="56"></a>
 
-<br><br>
-
 [![Latest release](https://img.shields.io/github/v/release/DevnetraConsultancy/nee-download-manager?label=release&color=E8B640&style=flat-square)](https://github.com/DevnetraConsultancy/nee-download-manager/releases/latest)
 [![Downloads](https://img.shields.io/github/downloads/DevnetraConsultancy/nee-download-manager/total?color=E8B640&style=flat-square)](https://github.com/DevnetraConsultancy/nee-download-manager/releases)
 [![Build](https://img.shields.io/github/actions/workflow/status/DevnetraConsultancy/nee-download-manager/ci.yml?branch=main&label=build%20%26%20tests&style=flat-square)](https://github.com/DevnetraConsultancy/nee-download-manager/actions/workflows/ci.yml)
