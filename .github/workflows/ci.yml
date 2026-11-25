@@ -46,8 +46,8 @@ jobs:
       - name: Build test programs
         shell: cmd
         run: |
-          call tests\native\mk.bat || exit /b 1
-          call tests\native\mkmedia.bat || exit /b 1
+          call "%GITHUB_WORKSPACE%\tests\native\mk.bat" || exit /b 1
+          call "%GITHUB_WORKSPACE%\tests\native\mkmedia.bat" || exit /b 1
 
       - name: Native tests
         shell: pwsh
