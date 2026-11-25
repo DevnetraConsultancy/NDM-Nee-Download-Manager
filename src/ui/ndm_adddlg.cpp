@@ -1,5 +1,5 @@
 // ndm_adddlg.cpp -- "Download File Info" / "Add URL" window (modeless, compact)
-// Invented with Care By Devnetra Consultancy
+// Copyright (c) 2026 Devnetra Consultancy. MIT License.
 //
 // One implementation serves two entry points:
 //   * Add URL (Ctrl+N / toolbar): editable address, clipboard prefill.

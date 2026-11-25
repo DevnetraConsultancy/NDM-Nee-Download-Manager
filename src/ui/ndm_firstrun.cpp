@@ -1,6 +1,6 @@
 // ndm_firstrun.cpp -- first-run questions (IDM-style), notification prefs,
 // "Add NDM to your browser" helper.
-// Invented with Care By Devnetra Consultancy
+// Copyright (c) 2026 Devnetra Consultancy. MIT License.
 //
 // Layout (96-dpi units, client 420 x 252):
 //   [logo] Welcome to NDM

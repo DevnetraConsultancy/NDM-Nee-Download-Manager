@@ -1,5 +1,5 @@
 // ndm_scheddlg.h -- Scheduler window (modeless, one at a time)
-// Invented with Care By Devnetra Consultancy
+// Copyright (c) 2026 Devnetra Consultancy. MIT License.
 #pragma once
 
 #define WIN32_LEAN_AND_MEAN

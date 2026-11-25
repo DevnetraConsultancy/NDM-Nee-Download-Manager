@@ -1,5 +1,5 @@
 // ndm_theme.cpp -- shared premium dark + gold drawing helpers for the NDM UI
-// Invented with Care By Devnetra Consultancy
+// Copyright (c) 2026 Devnetra Consultancy. MIT License.
 
 #include "ndm_theme.h"
 

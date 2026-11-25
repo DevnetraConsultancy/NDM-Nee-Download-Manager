@@ -1,7 +1,7 @@
 // ndm_uilogic.h -- small pure UI rules (no windows): date text, search
 // matching, clipboard link classification, menu state rules, speed / time
 // parsing. Unit-tested by build_p1/tests/uitest.cpp.
-// Invented with Care By Devnetra Consultancy
+// Copyright (c) 2026 Devnetra Consultancy. MIT License.
 #pragma once
 
 #define WIN32_LEAN_AND_MEAN

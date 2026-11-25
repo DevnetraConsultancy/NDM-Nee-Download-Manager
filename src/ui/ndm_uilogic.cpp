@@ -1,5 +1,5 @@
 // ndm_uilogic.cpp -- pure UI rules (see ndm_uilogic.h)
-// Invented with Care By Devnetra Consultancy
+// Copyright (c) 2026 Devnetra Consultancy. MIT License.
 
 #include "ndm_uilogic.h"
 #include "ndm_theme.h"

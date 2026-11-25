@@ -1,5 +1,5 @@
 // ndm_mainwnd.cpp -- NDM main window (premium dark + gold)
-// Invented with Care By Devnetra Consultancy
+// Copyright (c) 2026 Devnetra Consultancy. MIT License.
 //
 // Layout:  toolbar of large owner-painted icon buttons + live speed sparkline
 //          category sidebar | virtual (owner-data) custom-drawn ListView

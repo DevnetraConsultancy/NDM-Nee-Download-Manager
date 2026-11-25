@@ -1,6 +1,6 @@
 // ndm_firstrun.h -- first-run questions, notification preferences and the
 // "Add NDM to your browser" helper.
-// Invented with Care By Devnetra Consultancy
+// Copyright (c) 2026 Devnetra Consultancy. MIT License.
 #pragma once
 
 #define WIN32_LEAN_AND_MEAN

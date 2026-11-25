@@ -1,5 +1,5 @@
 // ndm_power.cpp -- completion action countdown + executor (see ndm_power.h)
-// Invented with Care By Devnetra Consultancy
+// Copyright (c) 2026 Devnetra Consultancy. MIT License.
 //
 // Layout (96-dpi units, client 380 x 118):
 //   [tile]  Shutting down in 30 s

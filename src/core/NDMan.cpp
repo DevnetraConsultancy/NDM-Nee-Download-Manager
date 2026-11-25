@@ -1,5 +1,5 @@
 // NDMan.cpp -- NDM application entry point
-// Invented with Care By Devnetra Consultancy
+// Copyright (c) 2026 Devnetra Consultancy. MIT License.
 //
 // Command line:
 //   -tray | /tray | --tray     start hidden in the notification area

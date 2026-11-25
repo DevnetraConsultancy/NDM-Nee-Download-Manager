@@ -111,12 +111,7 @@ and unknown sizes stay blank. Nothing is invented to look good.
 <tr><td align="center"><img src="docs/images/app-main.png" alt="NDM main window" width="100%"><br><sub>Main window — categories, Date column, live status bar</sub></td></tr>
 </table>
 
-| | |
-|---|---|
-| **1** Download button on the video | **2** Best quality first, then every resolution |
-| **3** Real audio tracks with codec and bitrate | **5** Photo button — full-resolution image |
-| **6** Download window | **7** Completion notice |
-| **8** Save dialog | |
+<img src="docs/images/legend.png" alt="What the numbers mean: 1 download button, 2 best quality first, 3 real audio tracks, 5 photo button, 6 download window, 7 completion notice, 8 save dialog" width="100%">
 
 **X (Twitter) — video and photo**
 <img src="docs/images/collage-x.png" alt="NDM on X: video quality list and photo download" width="100%">
@@ -330,6 +325,6 @@ SOFTWARE.
 
 <img src="resources/icons/png/ndm_64.png" width="48" alt="NDM logo">
 
-**Nee Download Manager** · © 2026 [Devnetra Consultancy](https://github.com/DevnetraConsultancy) · Invented with care
+**Nee Download Manager** · © 2026 [Devnetra Consultancy](https://github.com/DevnetraConsultancy)
 
 </div>

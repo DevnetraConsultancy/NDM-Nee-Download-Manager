@@ -1,5 +1,5 @@
 // ndm_dialogs.cpp -- small themed dialogs (see ndm_dialogs.h)
-// Invented with Care By Devnetra Consultancy
+// Copyright (c) 2026 Devnetra Consultancy. MIT License.
 //
 // Ask / Input are modal (owner disabled, local message loop, Ctx on the
 // caller's stack). The refresh window is modeless; its network check runs

@@ -1,5 +1,5 @@
 // NDMan.rc -- NDM application resources
-// Invented with Care By Devnetra Consultancy
+// Copyright (c) 2026 Devnetra Consultancy. MIT License.
 #include <winres.h>
 #include "../src/ui/ndm_resource.h"
 
@@ -28,7 +28,7 @@ BEGIN
             VALUE "OriginalFilename", "NDMan.exe"
             VALUE "ProductName",      "Nee Download Manager"
             VALUE "ProductVersion",   "1.0.5"
-            VALUE "Comments",         "Invented with Care By Devnetra Consultancy"
+            VALUE "Comments",         "Fast, free and open-source download manager"
         END
     END
     BLOCK "VarFileInfo"

@@ -1,7 +1,7 @@
 // ndm_dialogs.h -- small themed dialogs: question with buttons, one-line
 // input, duplicate / refresh prompts and the "Refresh download address"
 // window.
-// Invented with Care By Devnetra Consultancy
+// Copyright (c) 2026 Devnetra Consultancy. MIT License.
 #pragma once
 
 #define WIN32_LEAN_AND_MEAN

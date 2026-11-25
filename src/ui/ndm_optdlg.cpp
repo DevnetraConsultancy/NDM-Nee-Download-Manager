@@ -1,5 +1,5 @@
 // ndm_optdlg.cpp -- NDM Options (modal, compact, vertical tab rail)
-// Invented with Care By Devnetra Consultancy
+// Copyright (c) 2026 Devnetra Consultancy. MIT License.
 //
 // Every control maps to an NdmConfigMgr field; Save writes the INI and
 // applies the change to the running app immediately.

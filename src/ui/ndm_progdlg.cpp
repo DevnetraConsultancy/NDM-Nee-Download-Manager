@@ -1,5 +1,5 @@
 // ndm_progdlg.cpp -- per-download progress window (modeless, compact)
-// Invented with Care By Devnetra Consultancy
+// Copyright (c) 2026 Devnetra Consultancy. MIT License.
 //
 // Reads a consistent snapshot of the download on its own timer; closes itself
 // if the download is removed. Never keeps an NdmDownload pointer.

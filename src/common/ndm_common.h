@@ -23,10 +23,10 @@
 #define NDM_TRAY_CLASS      L"NDMTrayClass"
 
 // ---------------------------------------------------------------------------
-// Branding  (Invented with Care by Devnetra Consultancy)
+// Branding
 // ---------------------------------------------------------------------------
 #define NDM_PUBLISHER_NAME  L"Devnetra Consultancy"
-#define NDM_TAGLINE         L"Invented with Care By Devnetra Consultancy"
+#define NDM_TAGLINE         L"Fast, free and open-source download manager"
 #define NDM_CONTACT_EMAIL   L"devnetraconsultancy@gmail.com"
 #define NDM_COPYRIGHT       L"\u00A9 2026 Devnetra Consultancy · MIT License"
 

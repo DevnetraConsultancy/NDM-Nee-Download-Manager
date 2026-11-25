@@ -1,6 +1,6 @@
 // ---------------------------------------------------------------------------
 // ndm_torrent.cpp -- BitTorrent / magnet engine on top of the bundled aria2c
-// Invented with Care By Devnetra Consultancy
+// Copyright (c) 2026 Devnetra Consultancy. MIT License.
 //
 //  * One shared aria2c.exe per NDM session, started lazily, hidden
 //    (CREATE_NO_WINDOW) inside a kill-on-close job object (+ --stop-with-process)

@@ -1,5 +1,5 @@
 // ndm_scheddlg.cpp -- Scheduler window (modeless, compact)
-// Invented with Care By Devnetra Consultancy
+// Copyright (c) 2026 Devnetra Consultancy. MIT License.
 //
 // Layout (96-dpi units, client 460 x 282):
 //   [o] Start download at   [07:00]

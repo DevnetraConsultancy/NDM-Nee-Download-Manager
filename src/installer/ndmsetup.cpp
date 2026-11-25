@@ -56,7 +56,7 @@
 #define NDM_VERSION_MAJOR   1
 #define NDM_VERSION_MINOR   0
 #define NDM_PUBLISHER       L"Devnetra Consultancy"
-#define NDM_TAGLINE         L"Invented with Care By Devnetra Consultancy"
+#define NDM_TAGLINE         L"Fast, free and open-source download manager"
 #define NDM_EXE_NAME        L"NDMan.exe"
 #define NDM_PRODUCT         L"Nee Download Manager"
 #define NDM_UNINST_KEY      L"SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\Nee Download Manager"

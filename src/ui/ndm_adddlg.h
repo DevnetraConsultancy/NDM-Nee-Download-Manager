@@ -1,5 +1,5 @@
 // ndm_adddlg.h -- "Download File Info" / "Add URL" dialog (modeless, premium)
-// Invented with Care By Devnetra Consultancy
+// Copyright (c) 2026 Devnetra Consultancy. MIT License.
 #pragma once
 
 #define WIN32_LEAN_AND_MEAN

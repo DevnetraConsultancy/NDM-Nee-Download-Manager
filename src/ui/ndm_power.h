@@ -1,6 +1,6 @@
 // ndm_power.h -- on-completion actions: cancellable countdown window and
 // the sleep / hibernate / shut down itself.
-// Invented with Care By Devnetra Consultancy
+// Copyright (c) 2026 Devnetra Consultancy. MIT License.
 #pragma once
 
 #define WIN32_LEAN_AND_MEAN

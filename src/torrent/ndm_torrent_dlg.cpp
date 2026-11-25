@@ -1,5 +1,5 @@
 ﻿// ndm_torrent_dlg.cpp -- compact "Add Torrent" window (modal, dark + gold)
-// Invented with Care By Devnetra Consultancy
+// Copyright (c) 2026 Devnetra Consultancy. MIT License.
 //
 // Layout (96-dpi units, client 460 x 320):
 //   [tile]  Torrent name ..........................................
